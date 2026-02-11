@@ -1,0 +1,33 @@
+.icon-button {
+  width: 40px;
+  /* Largeur du bouton carré */
+  height: 40px;
+  /* Hauteur du bouton carré */
+  background-color: #0b0c30;
+  /* Couleur sombre type ciel nocturne */
+  border: none;
+  border-radius: 12px;
+  /* Coins arrondis */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.icon-button:hover {
+  opacity: 0.8;
+  /* background-color: #1a1b4d; */
+  /* Légère variation au survol */
+  transform: scale(1.05);
+}
+
+.icon-button:active {
+  transform: scale(0.95);
+}
+
+.icon {
+  width: 65%;
+  height: 65%;
+  color: white;
+}
