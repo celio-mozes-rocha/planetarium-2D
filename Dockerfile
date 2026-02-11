@@ -1,19 +1,18 @@
 # Étape 1 : build de l'application
-FROM node:20-alpine AS build
+FROM node:20-alpine AS builder
 
 WORKDIR /app
 
 COPY package*.json ./
+RUN npm ci
 RUN npm install
-
 COPY . .
-
 RUN npm run build
 
 # Étape 2 : serveur nginx ultra léger
 FROM nginx:alpine
 
-COPY --from=build /app/dist /usr/share/nginx/html
+COPY --from=builder /app/dist /usr/share/nginx/html
 
 EXPOSE 80
 
