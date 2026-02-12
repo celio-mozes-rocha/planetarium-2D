@@ -1,6 +1,6 @@
 // Menu.tsx
 import { RiLandscapeLine, RiCompass3Fill, } from "react-icons/ri";
-import { RxGlobe, RxLetterCaseCapitalize, RxGroup, RxReset, RxColorWheel, } from "react-icons/rx";
+import { RxGlobe, RxLetterCaseCapitalize, RxGroup, RxReset } from "react-icons/rx";
 import { VscSparkle } from "react-icons/vsc";
 import { IoCalendarNumberOutline, IoEarth, IoPlayBackSharp, IoPlayForwardSharp, IoPlaySharp } from "react-icons/io5";
 import { IconButton } from "./IconButton";
@@ -11,9 +11,6 @@ import { useEffect, useRef, useState } from "react";
 import MenuTooltip from "./MenuTooltip";
 
 export default function Menu({
-  //camAz,
-  //camAlt,
-  // scale,
   displayTime,
   timeZone,
   displayFPS,
@@ -63,16 +60,6 @@ export default function Menu({
 
   return (
     <>
-      {/* Info caméra : haut à gauche*/}
-      {/* <div className="absolute top-4 left-4 p-3 bg-black/60 backdrop-blur-md rounded-xl shadow-xl text-sm space-y-2 text-white">
-        <div>Az: {camAz.toFixed(1)}°</div>
-        <div>Alt: {camAlt.toFixed(1)}°</div>
-        <div>Zoom: {scale.toFixed(0)}</div>
-        <div>
-          Lune: {(moonIllumination * 100).toFixed(1)} %
-        </div>
-      </div> */}
-
       {/* date picker */}
       {showDatePicker && (
         <div className="absolute bottom-24 right-4 bg-brown p-3 border-2 border-white/50 rounded-lg shadow-xl z-50">
@@ -91,7 +78,6 @@ export default function Menu({
               newDate.setFullYear(y, m - 1, d);
               onSetTime(newDate);
             }}
-
           />
 
           <input
@@ -151,55 +137,55 @@ export default function Menu({
           {/* Icônes */}
           <div className="flex items-center justify-end gap-2 px-3 pt-2 opacity-0 translate-y-2 transition-all duration-100 ease-out group-hover:opacity-100 group-hover:translate-y-0">
 
-            <IconButton tooltip="Changer de lieu" shortcut="L" setTooltip={setTooltip} onClick={onOpenLocationPopup}>
+            <IconButton tooltip="Changer de lieu" shortcut="" setTooltip={setTooltip} onClick={onOpenLocationPopup}>
               <IoEarth size={28} />
             </IconButton>
 
-            <IconButton active={showGround} tooltip="Sol" shortcut="S" setTooltip={setTooltip} onClick={onToggleGround}>
+            <IconButton active={showGround} tooltip="Sol" shortcut="" setTooltip={setTooltip} onClick={onToggleGround}>
               <RiLandscapeLine size={28} />
             </IconButton>
 
-            <IconButton active={showDrawCardinals} tooltip="Points cardinaux" shortcut="C" setTooltip={setTooltip} onClick={onToggleCardinals}>
+            <IconButton active={showDrawCardinals} tooltip="Points cardinaux" shortcut="" setTooltip={setTooltip} onClick={onToggleCardinals}>
               <RiCompass3Fill size={28} />
             </IconButton>
 
-            <IconButton active={showEquatorialGrid} tooltip="Grille equatoriale" shortcut="E" setTooltip={setTooltip} onClick={onToggleEquatorialGrid}>
+            <IconButton active={showEquatorialGrid} tooltip="Grille equatoriale" shortcut="" setTooltip={setTooltip} onClick={onToggleEquatorialGrid}>
               <RxGlobe size={28} />
             </IconButton>
 
-            <IconButton active={showEquatorialGrid} tooltip="Grille Azimutal" shortcut="E" setTooltip={setTooltip} onClick={onToggleEquatorialGrid}>
+            {/* <IconButton active={showEquatorialGrid} tooltip="Grille Azimutal" shortcut="" setTooltip={setTooltip} onClick={onToggleEquatorialGrid}>
               <RxColorWheel size={28} />
-            </IconButton>
+            </IconButton> */}
 
-            <IconButton active={showConstellations} tooltip="Lignes des constellations" shortcut="E" setTooltip={setTooltip} onClick={onToggleConstellations}>
+            <IconButton active={showConstellations} tooltip="Lignes des constellations" shortcut="" setTooltip={setTooltip} onClick={onToggleConstellations}>
               <VscSparkle size={28} />
             </IconButton>
 
-            <IconButton active={showLabels} tooltip="Noms des constellations" shortcut="E" setTooltip={setTooltip} onClick={onToggleLabels}>
+            <IconButton active={showLabels} tooltip="Noms des constellations" shortcut="" setTooltip={setTooltip} onClick={onToggleLabels}>
               <RxLetterCaseCapitalize size={28} />
             </IconButton>
 
-            <IconButton active={showBoundaries} tooltip="Limite des constellations" shortcut="E" setTooltip={setTooltip} onClick={onToggleBoundaries}>
+            <IconButton active={showBoundaries} tooltip="Limite des constellations" shortcut="" setTooltip={setTooltip} onClick={onToggleBoundaries}>
               <RxGroup size={28} />
             </IconButton>
 
-            <IconButton tooltip="Choisir une date/heure" shortcut="A" setTooltip={setTooltip} onClick={() => setShowDatePicker(s => !s)}>
+            <IconButton tooltip="Choisir une date/heure" shortcut="" setTooltip={setTooltip} onClick={() => setShowDatePicker(s => !s)}>
               <IoCalendarNumberOutline size={28} />
             </IconButton>
 
-            <IconButton tooltip="Remonter le temps" shortcut="A" setTooltip={setTooltip} onClick={onBackTimeFaster}>
+            <IconButton tooltip="Remonter le temps" shortcut="" setTooltip={setTooltip} onClick={onBackTimeFaster}>
               <IoPlayBackSharp size={28} />
             </IconButton>
 
-            <IconButton tooltip="Vitesse normale" shortcut="V" setTooltip={setTooltip} onClick={onTimeNormal}>
+            <IconButton tooltip="Vitesse normale" shortcut="" setTooltip={setTooltip} onClick={onTimeNormal}>
               <IoPlaySharp size={28} />
             </IconButton>
 
-            <IconButton tooltip="Accélérer le temps" shortcut="A" setTooltip={setTooltip} onClick={onTimeFaster}>
+            <IconButton tooltip="Accélérer le temps" shortcut="" setTooltip={setTooltip} onClick={onTimeFaster}>
               <IoPlayForwardSharp size={28} />
             </IconButton>
 
-            <IconButton tooltip="Retour temps réel" shortcut="T" setTooltip={setTooltip} onClick={onTimeNow}>
+            <IconButton tooltip="Retour temps réel" shortcut="" setTooltip={setTooltip} onClick={onTimeNow}>
               <RxReset size={28} />
             </IconButton>
           </div>
