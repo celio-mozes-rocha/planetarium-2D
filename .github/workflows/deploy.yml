@@ -47,8 +47,7 @@ jobs:
             planetarium:latest
           rm planetarium.tar
       - name: Verify deployment
-      
+
         run: |
-          ssh -p ${{ secrets.VPS_PORT }} ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} \
+          ssh -p ${{ secrets.VPS_PORT }} ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}
           "curl -f http://localhost:8080 || exit 1"
-          EOF
