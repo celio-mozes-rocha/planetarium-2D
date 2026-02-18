@@ -20,14 +20,7 @@ export default function LocationPopup({ onClose, onSelect }: Props) {
   }, [onClose]);
 
   return (
-    <div className="
-      absolute bottom-24 right-4
-      bg-gray-900
-      border border-white/20
-      rounded-lg shadow-xl
-      p-4 z-50 w-64
-      animate-[fadeIn_0.15s_ease-out]
-    ">
+    <div className="absolute bottom-24 right-4 bg-brown border-2 border-white/50 rounded-lg shadow-xl p-4 z-50 w-64 animate-[fadeIn_0.15s_ease-out] ">
       <div className="flex justify-between items-center mb-2">
         <span className="text-sm text-white/90">
           Choisir un lieu
