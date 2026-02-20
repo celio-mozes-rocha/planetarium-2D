@@ -162,6 +162,11 @@ This ensures:
 - No direct source code on VPS
 - Container restart strategy with --restart unless-stopped
 
+## Project Status
+
+This project is under active development.
+Features are intentionally minimal and focused on experimentation and learning.
+
 ## Project Goals
 
 This project was built to:
