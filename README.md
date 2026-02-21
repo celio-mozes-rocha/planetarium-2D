@@ -1,7 +1,7 @@
 # Planetarium 2D (Nebula light)
 
 [![CI](https://img.shields.io/github/actions/workflow/status/celio-mozes-rocha/planetarium-2D/deploy.yml?branch=main)](https://github.com/celio-mozes-rocha/planetarium-2D/actions)
-[![License](https://img.shields.io/github/license/celio-mozes-rocha/planetarium-2D)](https://github.com/celio-mozes-rocha/planetarium-2D/blob/main/LICENSE)
+[![License](https://img.shields.io/github/license/celio-mozes-rocha/planetarium-2D)](https://github.com/celio-mozes-rocha/planetarium-2D/blob/main/LICENSE.txt)
 [![Last Commit](https://img.shields.io/github/last-commit/celio-mozes-rocha/planetarium-2D)](https://github.com/celio-mozes-rocha/planetarium-2D/commits/main)
 
 Minimal 2D planetarium built with **React**, **TypeScript**, and **TailwindCSS**.  
