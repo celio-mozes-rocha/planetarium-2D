@@ -1,4 +1,4 @@
-# Planetarium 2D
+# Planetarium 2D (Nebula light)
 
 [![CI](https://img.shields.io/github/actions/workflow/status/celio-mozes-rocha/planetarium-2D/deploy.yml?branch=main)](https://github.com/celio-mozes-rocha/planetarium-2D/actions)
 [![License](https://img.shields.io/github/license/celio-mozes-rocha/planetarium-2D)](https://github.com/celio-mozes-rocha/planetarium-2D/blob/main/LICENSE)
@@ -65,7 +65,6 @@ The objective is not to compete with full-featured 3D engines, but to build a so
 ## Architecture
 
 **Git Workflow**
-
 
 
 ```
