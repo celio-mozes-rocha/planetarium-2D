@@ -14,7 +14,7 @@ FROM nginx:alpine
 
 RUN apk update && apk upgrade
 
-COPY --from=builder /app/dist /usr/share/nginx/html
+COPY --from=build /app/dist /usr/share/nginx/html
 
 EXPOSE 80
 
