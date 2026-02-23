@@ -33,11 +33,13 @@ jobs:
       - name: Load and restart container on VPS
         run: |
           ssh -p ${{ secrets.VPS_PORT }} ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
+          set -e
           docker load -i planetarium.tar
           docker stop planetarium || true
           docker rm planetarium || true
           docker run -d \
             --name planetarium \
+            --label app=planetarium \
             -p 8080:80 \
             --restart unless-stopped \
             planetarium:latest
