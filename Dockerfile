@@ -1,5 +1,5 @@
 # Étape 1 : build de l'application
-FROM node:20-alpine AS builder
+FROM node:20-alpine AS build
 
 WORKDIR /app
 
@@ -11,6 +11,8 @@ RUN npm run build
 
 # Étape 2 : serveur nginx ultra léger
 FROM nginx:alpine
+
+RUN apk update && apk upgrade
 
 COPY --from=builder /app/dist /usr/share/nginx/html
 
