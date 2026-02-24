@@ -1,7 +1,7 @@
 # Planetarium 2D (Nebula light)
 
 [![CI](https://img.shields.io/github/actions/workflow/status/celio-mozes-rocha/planetarium-2D/deploy.yml?branch=main)](https://github.com/celio-mozes-rocha/planetarium-2D/actions)
-[![License](https://img.shields.io/github/license/celio-mozes-rocha/planetarium-2D)](https://github.com/celio-mozes-rocha/planetarium-2D/blob/main/LICENSE.txt)
+[![License](https://img.shields.io/github/license/celio-mozes-rocha/planetarium-2D)](https://github.com/celio-mozes-rocha/planetarium-2D/blob/main/LICENSE)
 [![Last Commit](https://img.shields.io/github/last-commit/celio-mozes-rocha/planetarium-2D)](https://github.com/celio-mozes-rocha/planetarium-2D/commits/main)
 
 Minimal 2D planetarium built with **React**, **TypeScript**, and **TailwindCSS**.  
@@ -31,7 +31,7 @@ The objective is not to compete with full-featured 3D engines, but to build a so
 
 ## Live Demo
 
-[https://celio-mozes.fr/planetarium](https://celio-mozes.fr/planetarium)
+[https://planetarium.celio-mozes.fr](https://planetarium.celio-mozes.fr)
 
 ---
 
@@ -175,3 +175,7 @@ This project was built to:
 - Implement a real CI/CD pipeline
 - Deploy and manage a production VPS environment
 - Follow a structured Git workflow
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
