@@ -1,15 +1,14 @@
+import Planetarium from "./components/Planetarium/Planetarium"
+import { LocationProvider } from "./context/LocationContext"
 
 
-function App() {
+export default function App() {
 
   return (
     <>
-
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <LocationProvider>
+        <Planetarium />
+      </LocationProvider>
     </>
   )
 }
-
-export default App

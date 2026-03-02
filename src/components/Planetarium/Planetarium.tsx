@@ -1,20 +1,22 @@
 import React, { useRef, useEffect, useState } from "react";
-import starsData from "../data/stars.json";
-import type { HitTargetType } from "../types/HitTargetType";
-import { localSiderealTime } from "../astro/time";
-import Menu from "./Menu";
-import { drawScene } from "../render/drawScene";
-import type { RenderContextType } from "../types/RenderContextType";
-import { RAD2DEG } from "../astro/constants";
-import LocationPopup from "./LocationPopUp";
-import type { SettingsRefType } from "../types/SettingsRefType";
-import { useSyncedRef } from "../hooks/useSyncedRef";
-import tzlookup from "tz-lookup"
-import { findClickedObject } from "../tools/findClickedObject";
-import { getObjectUnderCursor } from "../tools/getObjetcUnderCursor";
-import { getMousePos } from "../tools/getMousePos";
-import '../App.css';
-import InfoPanel from "./InfoPanel";
+import starsData from "../../data/stars.json";
+import type { HitTargetType } from "../../types/HitTargetType";
+import { localSiderealTime } from "../../astro/time";
+import Menu from "../Menu/Menu";
+import { drawScene } from "../../render/drawScene";
+import type { RenderContextType } from "../../types/RenderContextType";
+import { RAD2DEG } from "../../astro/constants";
+//import LocationPopup from "../LocationPopUp";
+import type { SettingsRefType } from "../../types/SettingsRefType";
+import { useSyncedRef } from "../../hooks/useSyncedRef";
+//import tzlookup from "tz-lookup"
+import { findClickedObject } from "../../tools/findClickedObject";
+import { getObjectUnderCursor } from "../../tools/getObjetcUnderCursor";
+import { getMousePos } from "../../tools/getMousePos";
+import InfoPanel from "../InfoPanel";
+import Location from "../MapComponent/Location"
+import { useLocation } from "../../context/LocationContext";
+//import '../../App.css';
 
 export default function Planetarium() {
 
@@ -53,16 +55,23 @@ export default function Planetarium() {
   const [displayFPS, setDisplayFPS] = useState(0);
   const [fov, setFov] = useState(0);
 
-  const [lat, setLat] = useState(48.8566);
-  const [lon, setLon] = useState(2.3522);
-  const [locationLabel, setLocationLabel] = useState("Paris (France)");
+  //const [lat, setLat] = useState(48.8566);
+  //const [lon, setLon] = useState(2.3522);
+  //const [locationLabel, setLocationLabel] = useState("Paris (France)");
   const [showLocationPopup, setShowLocationPopup] = useState(false);
-  const [timeZone, setTimeZone] = useState("Europe/Paris");
+  //const [timeZone, setTimeZone] = useState("Europe/Paris");
   const [selectedObject, setSelectedObject] = useState<HitTargetType | null>(null);
 
   const [drag, setDrag] = useState<{ x: number; y: number } | null>(null);
 
   const hitTargetsRef = useRef<HitTargetType[]>([]);
+
+  // observation coordinates
+  const { location } = useLocation();
+  const lat = location?.lat ?? 48.8566;
+  const lon = location?.lon ?? 2.3522;
+  const locationLabel = location?.label ?? "Paris";
+  const timeZone = location?.tz ?? "Europe/paris"
 
   // useRef groupé
   const settingsRef = useSyncedRef<SettingsRefType>({
@@ -286,16 +295,9 @@ export default function Planetarium() {
         onSetTime={setTime}
       />
       {showLocationPopup && (
-        <LocationPopup
+        <Location
           onClose={() => setShowLocationPopup(false)}
-          onSelect={(loc) => {
-            setLat(loc.lat);
-            setLon(loc.lon);
-            setLocationLabel(loc.label);
 
-            const tz = tzlookup(loc.lat, loc.lon);
-            setTimeZone(tz);
-          }}
         />
       )}
     </div>
