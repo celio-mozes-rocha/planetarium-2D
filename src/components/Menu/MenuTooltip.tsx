@@ -1,4 +1,4 @@
-import type { TooltipStateType } from "../types/TooltipStateType";
+import type { TooltipStateType } from "../../types/TooltipStateType";
 
 export default function MenuTooltip({
   tooltip,
