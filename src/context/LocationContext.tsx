@@ -2,7 +2,6 @@ import { createContext, useContext, useState, type ReactNode } from "react"
 import type { CoordinatesType, LocationContextType } from "../types/LocationContextType"
 import tz_lookup from "tz-lookup";
 
-
 const LocationContext = createContext<LocationContextType | undefined>(undefined)
 
 export function LocationProvider({ children }: { children: ReactNode }) {
