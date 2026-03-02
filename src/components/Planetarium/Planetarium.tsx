@@ -6,17 +6,14 @@ import Menu from "../Menu/Menu";
 import { drawScene } from "../../render/drawScene";
 import type { RenderContextType } from "../../types/RenderContextType";
 import { RAD2DEG } from "../../astro/constants";
-//import LocationPopup from "../LocationPopUp";
 import type { SettingsRefType } from "../../types/SettingsRefType";
 import { useSyncedRef } from "../../hooks/useSyncedRef";
-//import tzlookup from "tz-lookup"
 import { findClickedObject } from "../../tools/findClickedObject";
 import { getObjectUnderCursor } from "../../tools/getObjetcUnderCursor";
 import { getMousePos } from "../../tools/getMousePos";
 import InfoPanel from "../InfoPanel";
-import Location from "../MapComponent/Location"
+import Location from "../Map/Location"
 import { useLocation } from "../../context/LocationContext";
-//import '../../App.css';
 
 export default function Planetarium() {
 
@@ -54,14 +51,8 @@ export default function Planetarium() {
   const [moonIllumination, setMoonIllumination] = useState<number>(0);
   const [displayFPS, setDisplayFPS] = useState(0);
   const [fov, setFov] = useState(0);
-
-  //const [lat, setLat] = useState(48.8566);
-  //const [lon, setLon] = useState(2.3522);
-  //const [locationLabel, setLocationLabel] = useState("Paris (France)");
   const [showLocationPopup, setShowLocationPopup] = useState(false);
-  //const [timeZone, setTimeZone] = useState("Europe/Paris");
   const [selectedObject, setSelectedObject] = useState<HitTargetType | null>(null);
-
   const [drag, setDrag] = useState<{ x: number; y: number } | null>(null);
 
   const hitTargetsRef = useRef<HitTargetType[]>([]);
