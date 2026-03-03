@@ -31,7 +31,7 @@ export function LocationProvider({ children }: { children: ReactNode }) {
 export function useLocation() {
   const context = useContext(LocationContext)
   if (!context) {
-    throw new Error("useObservation must be used inside ObservationProvider")
+    throw new Error("useLocation must be used inside LocationProvider")
   }
   return context
 }
