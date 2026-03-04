@@ -14,8 +14,8 @@ export function LocationProvider({ children }: { children: ReactNode }) {
     }
   )
 
-  function updateLocation(lat: number, lon: number) {
-    const label = `Lieu : ${lat.toFixed(4)}, ${lon.toFixed(4)}`;
+  function updateLocation(lat: number, lon: number, searchLocationlabel?: string) {
+    const label = searchLocationlabel ?? `Lat/Lon : ${lat.toFixed(4)}, ${lon.toFixed(4)}`;
     const tz = tz_lookup(lat, lon);
 
     setLocation({ lat, lon, label, tz })
