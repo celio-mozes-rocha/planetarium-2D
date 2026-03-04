@@ -22,6 +22,7 @@ export default function SearchLocation() {
     setResults(data)
     setIsOpen(true)
   }
+  console.log("Results: ", results)
 
   const handleSelect = (r: NominatimResultType) => {
     const shortLabel = getShortLabel(r);

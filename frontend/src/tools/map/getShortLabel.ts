@@ -8,6 +8,7 @@ export default function getShortLabel(location: NominatimResultType) {
     "hamlet",
     "municipality",
     "state",
+    "observatory",
   ];
   const addressType = location.addresstype;
 
@@ -18,7 +19,10 @@ export default function getShortLabel(location: NominatimResultType) {
     if (localityDetails.length >= 2) {
       const first = localityDetails[0];
       const last = localityDetails[localityDetails.length - 1];
-      return `${first}, ${last}`;
+      const label = `${first}, ${last}`;
+      const shortLabel = label.length > 25 ? label.slice(0, 25) + "..." : label;
+
+      return `${shortLabel}`;
     }
   }
   return;
