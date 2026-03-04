@@ -7,5 +7,5 @@ export type CoordinatesType = {
 
 export type LocationContextType = {
   location: CoordinatesType;
-  updateLocation: (lat: number, lon: number) => void;
+  updateLocation: (lat: number, lon: number, label?: string) => void;
 };

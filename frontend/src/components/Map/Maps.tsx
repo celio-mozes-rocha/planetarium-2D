@@ -7,6 +7,7 @@ import {
   useMap,
 } from "react-leaflet";
 import LocationMarker from "./LocationMarker";
+import MapController from "./MapController";
 
 function ResizeMap() {
   const map = useMap();
@@ -31,6 +32,7 @@ export default function Maps() {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <LocationMarker />
+        <MapController />
       </MapContainer>
     </>
   );
