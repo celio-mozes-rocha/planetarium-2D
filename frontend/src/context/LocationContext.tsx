@@ -2,7 +2,6 @@ import { createContext, useContext, useState, type ReactNode } from "react"
 import type { CoordinatesType, LocationContextType } from "../types/LocationContextType"
 import tz_lookup from "tz-lookup";
 
-
 const LocationContext = createContext<LocationContextType | undefined>(undefined)
 
 export function LocationProvider({ children }: { children: ReactNode }) {
@@ -15,8 +14,8 @@ export function LocationProvider({ children }: { children: ReactNode }) {
     }
   )
 
-  function updateLocation(lat: number, lon: number) {
-    const label = `Lieu : ${lat.toFixed(4)}, ${lon.toFixed(4)}`;
+  function updateLocation(lat: number, lon: number, searchLocationlabel?: string) {
+    const label = searchLocationlabel ?? `Lat/Lon : ${lat.toFixed(4)}, ${lon.toFixed(4)}`;
     const tz = tz_lookup(lat, lon);
 
     setLocation({ lat, lon, label, tz })
@@ -32,7 +31,7 @@ export function LocationProvider({ children }: { children: ReactNode }) {
 export function useLocation() {
   const context = useContext(LocationContext)
   if (!context) {
-    throw new Error("useObservation must be used inside ObservationProvider")
+    throw new Error("useLocation must be used inside LocationProvider")
   }
   return context
 }

@@ -9,15 +9,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Build Docker image
-        run: docker build -t planetarium:latest .
+      # Build images
+      - name: Build frontend image
+        run: docker build -t planetarium-frontend -f frontend/Dockerfile.prod ./frontend
 
-      - name: Save Docker image to tar
-        run: docker save planetarium:latest -o planetarium.tar
+      - name: Build backend image
+        run: docker build -t planetarium-backend -f backend/Dockerfile.prod ./backend
 
+      # Save images
+      - name: Save images
+        run: |
+          docker save planetarium-frontend -o frontend.tar
+          docker save planetarium-backend -o backend.tar
+
+      # Setup SSH
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
@@ -25,30 +32,31 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -p ${{ secrets.VPS_PORT }} ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Copy image to VPS
+      # Copy images
+      - name: Copy images to VPS
         run: |
-          scp -P ${{ secrets.VPS_PORT }} planetarium.tar \
+          scp -P ${{ secrets.VPS_PORT }} frontend.tar backend.tar \
           ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/home/${{ secrets.VPS_USER }}/
 
-      - name: Load and restart container on VPS
+      # Deploy
+      - name: Deploy
         run: |
           ssh -p ${{ secrets.VPS_PORT }} ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
           set -e
-          docker load -i planetarium.tar
-          docker stop planetarium || true
-          docker rm planetarium || true
-          docker run -d \
-            --name planetarium \
-            --label app=planetarium \
-            -p 8080:80 \
-            --restart unless-stopped \
-            planetarium:latest
-          rm planetarium.tar
+
+          docker load -i frontend.tar
+          docker load -i backend.tar
+
+          docker compose -f docker-compose.prod.yml up -d
+
+          rm frontend.tar backend.tar
+          docker image prune -f
+          EOF
 
       - name: Verify deployment
         run: |
-          ssh -p ${{secrets.VPS_PORT }} ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
+          ssh -p ${{ secrets.VPS_PORT }} ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
             set -e
             curl -f http://localhost:8080
-            echo "Health check passed"
+            echo "check passed"
           EOF

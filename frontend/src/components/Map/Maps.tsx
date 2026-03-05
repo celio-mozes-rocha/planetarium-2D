@@ -7,6 +7,7 @@ import {
   useMap,
 } from "react-leaflet";
 import LocationMarker from "./LocationMarker";
+import MapController from "./MapController";
 
 function ResizeMap() {
   const map = useMap();
@@ -30,10 +31,8 @@ export default function Maps() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-
-        {/* <LocationUser selectedPosition={selectedPosition} /> */}
-
         <LocationMarker />
+        <MapController />
       </MapContainer>
     </>
   );
