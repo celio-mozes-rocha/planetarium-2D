@@ -14,8 +14,7 @@ export default function SearchLocation() {
   const search = async () => {
     if (!query.trim()) return
 
-    const res = await fetch(
-      `${import.meta.env.VITE_API_URL}/api/search?q=${encodeURIComponent(query)}`
+    const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`
     )
 
     const data = await res.json()
