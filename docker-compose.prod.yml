@@ -2,15 +2,19 @@ version: "3.9"
 
 services:
   backend:
-    image: planetarium-backend:latest
+    image: planetarium-backend
+    container_name: planetarium-backend
     ports:
       - "3310:3310"
+    restart: unless-stopped
     environment:
       - NODE_ENV=production
 
   frontend:
-    image: planetarium-frontend:latest
+    image: planetarium-frontend
+    container_name: planetarium-frontend
     ports:
       - "8080:80"
     depends_on:
       - backend
+    restart: unless-stopped
