@@ -38,6 +38,12 @@ jobs:
           scp -P ${{ secrets.VPS_PORT }} frontend.tar backend.tar \
           ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/home/${{ secrets.VPS_USER }}/
 
+      # docker-compose.prod.yml
+      - name: Copy docker-compose file
+        run: |
+          scp -P ${{ secrets.VPS_PORT }} docker-compose.prod.yml \
+          ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/home/${{ secrets.VPS_USER }}/  
+              
       # Deploy
       - name: Deploy
         run: |
@@ -47,7 +53,7 @@ jobs:
           docker load -i frontend.tar
           docker load -i backend.tar
 
-          docker compose -f docker-compose.prod.yml up -d
+          docker-compose -f docker-compose.prod.yml up -d
 
           rm frontend.tar backend.tar
           docker image prune -f
