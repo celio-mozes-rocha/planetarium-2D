@@ -18,9 +18,3 @@ services:
       - "8080:80"
     depends_on:
       - backend
-    networks:
-      - planetarium-net
-
-networks:
-  planetarium-net:
-    driver: bridge
