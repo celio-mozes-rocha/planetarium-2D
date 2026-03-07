@@ -197,12 +197,6 @@ cd planetarium-2D
 npm install
 npm run dev
 ```
-## Production Build (without Docker)
-
-```bash
-npm run build
-npm run preview
-```
 
 ## Continuous Deployment
 
