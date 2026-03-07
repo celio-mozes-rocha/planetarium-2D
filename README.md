@@ -52,13 +52,21 @@ The objective is not to compete with full-featured 3D engines, but to build a so
 - TailwindCSS
 - Vite
 
+**Backend**
+
+- Node.js
+- Express
+- TypeScript
+- OpenStreetMap Nominatim API
+
 **DevOps & Deployment**
 
-- Docker (multi-stage build)
+- Docker (multi-container architecture)
+- Docker Compose
 - GitHub Actions (CI/CD)
 - Ubuntu VPS
 - SSH key authentication
-- Nginx (Docker container runtime)
+- Nginx (reverse proxy)
 
 ---
 
@@ -84,44 +92,102 @@ Merge into main
 **CI/CD Deployment Flow**
 
 1. Merge into `main` triggers GitHub Actions
-2. Docker image is built in CI
-3. Image is exported as a `.tar` artifact
-4. Image is transferred securely to the VPS via SSH
-5. VPS loads the image and restarts the container
-6. Health check validates the deployment
+2. Docker image (frontend and backend) are built in CI
+3. Images are exported as a `.tar` artifact
+4. Images are transferred securely to the VPS via SSH
+5. VPS loads the images
+6. Docker compose restarts the services
+7. Health check validates the deployment
 
 
-GitHub → GitHub Actions → Docker Image → VPS → Nginx → Users
+GitHub → GitHub Actions → Docker Images → VPS → Docker compose → Nginx Reverse proxy → Users
 
 
 The VPS acts only as a **Docker runtime**.  
 No source code or Node.js environment is required on the server.
 
 
+## Application Architecture
+
+The application follows a simple **frontend / backend architecture**.
+
+Frontend requests are routed through **Nginx**, which serves the static React application and proxies API requests to the backend service.
+
+```
+User
+↓
+Nginx (reverse proxy)
+↓
+React frontend
+↓
+/api
+↓
+Node.js backend
+↓
+OpenStreetMap Nominatim PAI
+```
+
+
+### Components
+
+**Frontend**
+- React application
+- HTML Canvas based sky rendering
+- UI interaction and search interface
+
+**Backend**
+- Express API
+- Proxy for OpenStreetMap Nominatim requests
+- Handles geolocation search
+
+**Nginx**
+- Serves static frontend files
+- Reverse proxy for `/api` routes
+
+
 ## Docker
 
-**Multi-stage Dockerfile**
+The project uses **two Docker images** orchestrated with **Docker Compose**.
 
-- Stage 1: Build React app with Node
-- Stage 2: Serve static files using Nginx (Alpine)
+### Frontend container
 
-This ensures:
-- Small production image
-- No development dependencies in production
-- Clean separation between build and runtime
+- Multi-stage build
+- React app compiled with Node
+- Static files served by Nginx
+
+### Backend container
+
+- Node.js + Express API
+- Built from TypeScript source
+- Exposes REST endpoint `/api/search`
+
+### Nginx Reverse Proxy
+
+Nginx serves the frontend and forwards API calls:
+- /api/* → backend:3310
+This allows the frontend to call the backend using **relative URLs** without exposing internal services.
+---
 
 **Run locally with Docker**
 
 ```bash
-docker build -t planetarium .
-docker run -p 8080:80 planetarium
+docker compose -f docker-compose.dev.yml up --build
 ```
 
-Then open:
+Once the containers are running, open:
 
 ```
-http://localhost:8080
+http://localhost:5173
 ```
+The development environment uses the Vite dev server with hot reload enabled.
+
+Services started
+
+frontend → Vite development server
+
+backend → Node.js / Express API
+
+API requests from the frontend are proxied to the backend through the Vite development server
 
 ## Local Development
 
@@ -160,6 +226,22 @@ This ensures:
 - Secrets stored in GitHub Actions
 - No direct source code on VPS
 - Container restart strategy with --restart unless-stopped
+
+## New feature - Location Search
+The application includes a location search feature allowing users to select a place on Earth and update the sky view accordingly.
+![Location search](./docs/location-search.png)
+Workflow:
+
+1. The user searches for a location (city, place, etc.)
+2. The frontend sends a request to /api/search
+3. The backend queries the OpenStreetMap Nominatim API
+4. Results are returned to the frontend
+5. The sky map updates using the selected coordinates
+
+This architecture provides several advantages:
+
+- External API calls are handled by the backend
+- The frontend uses a simple /api endpoint
 
 ## Project Status
 

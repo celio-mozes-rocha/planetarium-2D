@@ -53,7 +53,7 @@ jobs:
           docker load -i frontend.tar
           docker load -i backend.tar
 
-          docker-compose -f docker-compose.prod.yml up -d
+          docker-compose -f docker-compose.prod.yml up -d --force-recreate
 
           rm frontend.tar backend.tar
           docker image prune -f
