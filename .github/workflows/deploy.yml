@@ -50,7 +50,7 @@ jobs:
           ssh -p ${{ secrets.VPS_PORT }} ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
           set -e
 
-          docker compose -f docker-compose.prod.yml down --remove-orphans          
+          docker-compose -f docker-compose.prod.yml down --remove-orphans          
           docker load -i frontend.tar
           docker load -i backend.tar
           docker-compose -f docker-compose.prod.yml up -d --force-recreate
