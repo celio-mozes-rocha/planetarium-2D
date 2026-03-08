@@ -1,6 +1,6 @@
 // Menu.tsx
 import { RiLandscapeLine, RiCompass3Fill, } from "react-icons/ri";
-import { RxGlobe, RxLetterCaseCapitalize, RxGroup, RxReset } from "react-icons/rx";
+import { RxGlobe, RxGroup, RxReset } from "react-icons/rx";
 import { VscSparkle } from "react-icons/vsc";
 import { IoCalendarNumberOutline, IoEarth, IoPlayBackSharp, IoPlayForwardSharp, IoPlaySharp } from "react-icons/io5";
 import { IconButton } from "../IconButton";
