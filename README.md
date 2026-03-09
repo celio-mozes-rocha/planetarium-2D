@@ -168,6 +168,15 @@ Nginx serves the frontend and forwards API calls:
 This allows the frontend to call the backend using **relative URLs** without exposing internal services.
 ---
 
+## Local Development
+
+```bash
+git clone https://github.com/celio-mozes-rocha/planetarium-2D.git
+cd planetarium-2D
+npm install
+npm run dev
+```
+
 **Run locally with Docker**
 
 ```bash
@@ -189,14 +198,6 @@ backend → Node.js / Express API
 
 API requests from the frontend are proxied to the backend through the Vite development server
 
-## Local Development
-
-```bash
-git clone https://github.com/celio-mozes-rocha/planetarium-2D.git
-cd planetarium-2D
-npm install
-npm run dev
-```
 
 ## Continuous Deployment
 
