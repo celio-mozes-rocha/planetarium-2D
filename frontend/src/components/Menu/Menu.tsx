@@ -1,6 +1,6 @@
 // Menu.tsx
 import { RiLandscapeLine, RiCompass3Fill, } from "react-icons/ri";
-import { RxGlobe, RxLetterCaseCapitalize, RxGroup, RxReset } from "react-icons/rx";
+import { RxGlobe, RxGroup, RxReset } from "react-icons/rx";
 import { VscSparkle } from "react-icons/vsc";
 import { IoCalendarNumberOutline, IoEarth, IoPlayBackSharp, IoPlayForwardSharp, IoPlaySharp } from "react-icons/io5";
 import { IconButton } from "../IconButton";
@@ -9,6 +9,7 @@ import type { MenuPropsType } from "../../types/MenuPropsType";
 import type { TooltipStateType } from "../../types/TooltipStateType";
 import { useEffect, useRef, useState } from "react";
 import MenuTooltip from "./MenuTooltip";
+import { BsAlphabetUppercase } from "react-icons/bs";
 
 export default function Menu({
   displayTime,
@@ -162,7 +163,7 @@ export default function Menu({
             </IconButton>
 
             <IconButton active={showLabels} tooltip="Noms des constellations" shortcut="" setTooltip={setTooltip} onClick={onToggleLabels}>
-              <RxLetterCaseCapitalize size={28} />
+              <BsAlphabetUppercase size={28} />
             </IconButton>
 
             <IconButton active={showBoundaries} tooltip="Limite des constellations" shortcut="" setTooltip={setTooltip} onClick={onToggleBoundaries}>
