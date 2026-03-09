@@ -14,7 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Purge old workflow runs
-        uses: boredland/action-purge-workflow-runs@v1
+        uses: action/delete-workflow-runs@v2
         with:
-          keep: ${{ github.event.inputs.keep || 15 }}
           token: ${{ secrets.GITHUB_TOKEN }}
+          keep: ${{ github.event.inputs.keep || 15 }}
+          repository: ${{ github.repository }}
